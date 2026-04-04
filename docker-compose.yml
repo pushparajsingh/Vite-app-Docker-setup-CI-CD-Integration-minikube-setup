@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  react-app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev # Dev wali file use karega
+    ports:
+      - "3000:3000" # Bahar ka 3000 -> Container ka 3000
+    volumes:
+      # Bind Mount: Host machine ke files ko container ke /app folder se real-time sync (map) karta hai. Isse code changes save karte hi bina rebuild kiye hot-reload reflect ho jaenge.
+      - .:/app 
+      # Anonymous Volume: Local 'node_modules' ko container ke andar aane se block karta hai. Docker container apni isolated aur OS-specific node_modules banayega, jisse module conflicts nahi honge.
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true # Windows/Linux hot-reload fix ke liye

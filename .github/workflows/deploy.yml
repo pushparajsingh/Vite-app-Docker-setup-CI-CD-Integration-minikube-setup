@@ -1,0 +1,24 @@
+name: Build and Deploy to Minikube
+
+on:
+  push:
+    branches:
+      - main  # Jab main branch pe push ho
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Build and Push Production Image
+        run: |
+          docker build -t pushpa369/react-app:latest .
+          docker push pushpa369/react-app:latest

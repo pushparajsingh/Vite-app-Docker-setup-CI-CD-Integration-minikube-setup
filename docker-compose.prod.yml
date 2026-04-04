@@ -1,0 +1,10 @@
+version: '3.8'
+
+services:
+  react-app-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile # Yeh production wali file uthayega
+    ports:
+      - "80:80"
+    restart: always
