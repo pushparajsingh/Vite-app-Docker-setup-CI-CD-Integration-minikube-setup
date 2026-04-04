@@ -1,24 +1,31 @@
 name: Build and Deploy to Minikube
 
+# Trigger the workflow on push events
 on:
   push:
+    # Specifically target the main branch
     branches:
       - main  # Jab main branch pe push ho
 
 jobs:
+  # Define a job to build the Docker image and push it to Docker Hub
   build-and-push:
+    # Use the latest Ubuntu runner environment
     runs-on: ubuntu-latest
     steps:
+      # Step 1: Checkout the repository code onto the runner
       - name: Checkout Code
         uses: actions/checkout@v3
 
+      # Step 2: Authenticate with Docker Hub using repository secrets
       - name: Login to Docker Hub
         uses: docker/login-action@v2
         with:
           username: ${{ secrets.DOCKER_HUB_USERNAME }}
           password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
 
+      # Step 3: Build the Docker image from docker-compose.prod.yml and push it to the registry
       - name: Build and Push Production Image
         run: |
-          docker build -t pushpa369/react-app:latest .
-          docker push pushpa369/react-app:latest
+          docker-compose -f docker-compose.prod.yml build
+          docker-compose -f docker-compose.prod.yml push

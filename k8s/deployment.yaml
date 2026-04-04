@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-app
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: react-app
+  template:
+    metadata:
+      labels:
+        app: react-app
+    spec:
+      containers:
+      - name: react-app
+        image: pushpa369/react-app:latest # Docker Hub wali image
+        imagePullPolicy: Always # Ye zaroori hai taaki naya maal download ho
+        ports:
+        - containerPort: 80

@@ -1,10 +1,19 @@
 version: '3.8'
 
 services:
+  # Define the production react application service
   react-app-prod:
+    # Build configuration to create the production image
     build:
-      context: .
+      context: . # Use the root directory as the context
       dockerfile: Dockerfile # Yeh production wali file uthayega
+    
+    # Specify the name and tag of the built image
+    image: pushpa369/react-app:latest
+    
+    # Map port 80 on the host to port 80 (Nginx default) inside the container
     ports:
       - "80:80"
+    
+    # Ensure the container automatically restarts if it crashes or the daemon restarts
     restart: always

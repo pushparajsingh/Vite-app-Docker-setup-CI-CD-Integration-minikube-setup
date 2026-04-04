@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: react-app-service
+spec:
+  selector:
+    app: react-app # Ye tumhare deployment ke label se match hona chahiye
+  ports:
+    - protocol: TCP
+      port: 80       # Service ka port
+      targetPort: 80 # Container (Nginx) ka port
+  type: NodePort     # Minikube ke liye NodePort best hai
