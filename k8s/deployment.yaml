@@ -20,3 +20,4 @@ spec:
         imagePullPolicy: Always # Ye zaroori hai taaki naya maal download ho
         ports:
         - containerPort: 80
+        

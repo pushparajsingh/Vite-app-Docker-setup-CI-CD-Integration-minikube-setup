@@ -16,6 +16,8 @@ jobs:
       # Step 1: Checkout the repository code onto the runner
       - name: Checkout Code
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       # Step 2: Authenticate with Docker Hub using repository secrets
       - name: Login to Docker Hub
@@ -29,3 +31,11 @@ jobs:
         run: |
           docker compose -f docker-compose.prod.yml build
           docker compose -f docker-compose.prod.yml push
+      - name: Update Deployment Trigger
+        run: |
+          sed -i "s/refresh: always/refresh: $(date +%s)/" k8s/deployment.yaml
+          git config --global user.name 'GitHub Actions'
+          git config --global user.email 'actions@github.com'
+          git add k8s/deployment.yaml
+          git commit -m "Auto-trigger deployment update"
+          git push
