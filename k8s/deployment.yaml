@@ -9,6 +9,8 @@ spec:
       app: react-app
   template:
     metadata:
+      annotations:
+        argocd.argoproj.io/refresh: always
       labels:
         app: react-app
     spec:
