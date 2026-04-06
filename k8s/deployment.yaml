@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       annotations:
-        argocd.argoproj.io/refresh: "1775443140"
+        argocd.argoproj.io/refresh: "1775444682"
       labels:
         app: react-app
     spec:
