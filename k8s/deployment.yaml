@@ -10,7 +10,7 @@ spec:
   template:
     metadata:
       annotations:
-        argocd.argoproj.io/refresh: 1775441573
+        argocd.argoproj.io/refresh: always
       labels:
         app: react-app
     spec:
@@ -20,4 +20,3 @@ spec:
         imagePullPolicy: Always # Ye zaroori hai taaki naya maal download ho
         ports:
         - containerPort: 80
-        
