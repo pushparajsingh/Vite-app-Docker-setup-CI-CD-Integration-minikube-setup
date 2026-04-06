@@ -27,5 +27,5 @@ jobs:
       # Step 3: Build the Docker image from docker-compose.prod.yml and push it to the registry
       - name: Build and Push Production Image
         run: |
-          docker-compose -f docker-compose.prod.yml build
-          docker-compose -f docker-compose.prod.yml push
+          docker compose -f docker-compose.prod.yml build
+          docker compose -f docker-compose.prod.yml push
